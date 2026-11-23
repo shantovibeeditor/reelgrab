@@ -1,0 +1,39 @@
+/* ReelGrab site tokens (see DESIGN.md). Pages use these names, never raw values. */
+:root {
+  --bg: #070a07;
+  --surface: #0f140e;
+  --surface-2: #151c14;
+  --line: rgba(255, 255, 255, .08);
+  --line-2: rgba(255, 255, 255, .14);
+  --text: #f1f6ea;
+  --muted: #8f9c89;
+  --dim: #7a8775;
+  --lime: #c6ff3a;
+  --lime-hover: #d4ff63;
+  --lime-ink: #0d1406;
+  --lime-soft: rgba(198, 255, 58, .12);
+  --deep: #14301a;
+  --err: #ff6b5e;
+
+  --font: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-bn: "Hind Siliguri", -apple-system, "Kohinoor Bangla", sans-serif;
+
+  --fs-display: clamp(40px, 6.4vw, 64px);
+  --fs-h2: clamp(30px, 4.4vw, 44px);
+  --fs-h3: 22px;
+  --fs-lead: clamp(18px, 2vw, 20px);
+  --fs-body: 17px;
+  --fs-small: 14px;
+  --fs-caption: 12.5px;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+  --section: clamp(64px, 10vw, 128px);
+  --width: 1120px;
+  --text-width: 640px;
+  --gutter: clamp(16px, 3vw, 24px);
+
+  --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-xl: 32px; --r-pill: 999px;
+  --shadow-hero: 0 30px 80px rgba(0, 0, 0, .45);
+  --ring: 0 0 0 3px var(--bg), 0 0 0 6px var(--lime);
+}
