@@ -1,4 +1,4 @@
-# ReelGrab
+# ReelBhai
 
 The viral part of any video, ready for Reels. Mac app.
 
