@@ -141,6 +141,7 @@
     .phone { width: 270px; }
     .gets, .plans { grid-template-columns: 1fr; }
     .hero .btn, .ctas .btn { width: 100%; }
+    .hero .btn + .btn { margin-top: 10px; }
     .plan { padding: 26px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -168,7 +169,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
           Download for Mac, free
         </a>
-        <p class="fine">macOS 11+ · Apple Silicon and Intel</p>
+        <a class="btn btn-secondary" href="#download" data-link="win">Windows (Beta)</a>
+        <p class="fine">Mac: macOS 11+, Apple Silicon and Intel · Windows 10 and 11 (beta)</p>
       </div>
       <div class="phone" role="img" aria-label="A 9:16 Reel made by ReelBhai: two people split screen, with word-by-word captions">
         <div class="screen" id="heroScreen">
@@ -218,7 +220,7 @@
           <h3>Free</h3>
           <div class="price"><b>৳0</b></div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>2 clips a day</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>3 clips a day</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Up to 1080p</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>All features to try</li>
           </ul>
@@ -244,7 +246,7 @@
     <div class="narrow">
       <h2 id="faq-h">Questions</h2>
       <div class="faq">
-        <details><summary>Does it work on Windows?</summary><p>Not yet. Mac only for now (macOS 11 or later, Apple Silicon and Intel). Windows is coming.</p></details>
+        <details><summary>Does it work on Windows?</summary><p>Yes, in beta: Windows 10 and 11 (64-bit). Download <b>ReelBhai-Setup.exe</b> and double-click it. If Windows says "Windows protected your PC", click <b>More info</b>, then <b>Run anyway</b> (you only see this once). If YouTube asks "are you a bot?", install Firefox, sign in to YouTube there and try again. The same Premium key works on Mac and Windows.</p></details>
         <details><summary>How do I get my key after paying?</summary><p>Send your bKash or Nagad transaction ID on WhatsApp. We send the key back. In ReelBhai, click Upgrade, then Activate, and paste it.</p></details>
         <details><summary>macOS says it "can't be opened". What now?</summary><p>Open System Settings, then Privacy &amp; Security, scroll down and click Open Anyway. If it says "damaged", open Terminal, paste <code>xattr -cr /Applications/ReelBhai.app</code> and press Enter.</p></details>
         <details><summary>What videos can I use?</summary><p>YouTube, TikTok and public Facebook links, or video files on your Mac. Use videos you have the right to use: your own, your clients', or ones you have permission to repost.</p></details>
@@ -260,6 +262,7 @@
       <h2 id="dl-h">Make your first Reel today.</h2>
       <div class="ctas">
         <a class="btn btn-primary" href="#download" data-link="dmg">Download for Mac, free</a>
+        <a class="btn btn-secondary" href="#download" data-link="win">Windows (Beta)</a>
         <a class="btn btn-secondary" href="#" data-link="whatsapp" target="_blank" rel="noopener">Ask on WhatsApp</a>
       </div>
       <p class="fine" id="dlNote"></p>
@@ -284,6 +287,7 @@
     ? { user: location.hostname.split(".")[0], repo: location.pathname.split("/")[1] || location.hostname } : null;
   const LINKS = {
     dmg: GH ? `https://github.com/${GH.user}/${GH.repo}/releases/latest/download/ReelBhai.dmg` : "",
+    win: GH ? `https://github.com/${GH.user}/${GH.repo}/releases/latest/download/ReelBhai-Setup.exe` : "",
     whatsapp: "8801723042590",
   };
   const wa = (text) => `https://wa.me/${LINKS.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -294,6 +298,19 @@
   document.querySelectorAll('[data-link="dmg"]').forEach((a) => {
     if (LINKS.dmg) { a.href = LINKS.dmg; a.setAttribute("download", ""); }
   });
+  document.querySelectorAll('[data-link="win"]').forEach((a) => {
+    if (LINKS.win) { a.href = LINKS.win; a.setAttribute("download", ""); }
+  });
+  // Windows visitors: the main buttons download the Windows installer instead
+  if (/Windows/i.test(navigator.userAgent) && LINKS.win) {
+    document.querySelectorAll('[data-link="dmg"]').forEach((a) => {
+      a.href = LINKS.win;
+      a.lastChild.textContent = a.lastChild.textContent.replace("for Mac", "for Windows (Beta)");
+    });
+    document.querySelectorAll('[data-link="win"]').forEach((a) => {
+      a.href = LINKS.dmg; a.textContent = "Mac version";
+    });
+  }
   if (!LINKS.dmg) {
     document.getElementById("dlNote").innerHTML = 'Download link works on the live site. Questions? <a href="' +
       wa("Hi! I have a question about ReelBhai.") + '" target="_blank" rel="noopener">Message us on WhatsApp</a>.';
